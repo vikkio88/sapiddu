@@ -1,0 +1,14 @@
+{
+  "name": "sapiddu",
+  "version": "1.0.0",
+  "description": "a jsonstore.io model wrapper",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Vincenzo Ciaccio <vincenzo.ciaccio@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}
