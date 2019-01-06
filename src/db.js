@@ -1,4 +1,5 @@
 const axios = require('axios');
+const ULID = require('ulid');
 const BASE_URL = 'https://www.jsonstore.io/';
 
 const db = (token) => {
@@ -27,9 +28,15 @@ const db = (token) => {
             return instance.get(`${modelName}/${id}`)
                 .then(this.handleResult);
         },
-        post(modelName, id, body) {
+        post(modelName, body) {
+            const id = ULID.ulid();
             return instance.post(`${modelName}/${id}`, body)
-                .then(this.handleResult);
+                .then(this.handleResult).then(result => {
+                    return new Promise((resolve, reject) => {
+                        result ? resolve({id}) : reject(500);
+
+                    });
+                });
         },
         delete(modelName, id) {
             return instance.delete(`${modelName}/${id}`)
@@ -39,7 +46,7 @@ const db = (token) => {
             return new Promise((resolve, reject) => {
                 if (status > 299) reject(status);
                 if (('ok' in data) && data.ok === true) {
-                    return resolve('result' in data ? data.result : true)
+                    resolve('result' in data ? data.result : true)
                 }
                 reject(data.error || 'Unexpected Error');
             })
