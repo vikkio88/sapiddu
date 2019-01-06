@@ -28,15 +28,19 @@ const db = (token) => {
             return instance.get(`${modelName}/${id}`)
                 .then(this.handleResult);
         },
-        post(modelName, body) {
-            const id = ULID.ulid();
+        post(modelName, body, id = null) {
+            id = id || ULID.ulid();
             return instance.post(`${modelName}/${id}`, body)
                 .then(this.handleResult).then(result => {
                     return new Promise((resolve, reject) => {
                         result ? resolve({id}) : reject(500);
-
                     });
                 });
+        },
+        put(modelName, id, body) {
+            return this.getOne(modelName, id).then(oldBody => {
+                return this.post(modelName, Object.assign(oldBody, body), id);
+            });
         },
         delete(modelName, id) {
             return instance.delete(`${modelName}/${id}`)
