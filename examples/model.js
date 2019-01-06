@@ -1,10 +1,6 @@
-require('dotenv').config();
-const TOKEN = process.env.TOKEN;
-
-const db = require('../src/db').db(TOKEN);
-const entityManager = require('../src/db').entityManager(db);
+const entityManager = require('../src/db').entityManager();
 const modelName = 'thing';
-const id = '01D0GBYRBG1XYPS3QB95EY6J5N';
+const id = '01D0GBZJ3CA2MDSPT1E9KW3G91';
 const thing = entityManager.getEntity(modelName);
 
 thing.create({ciao: Math.round(Math.random() * 200)}).then(result => {

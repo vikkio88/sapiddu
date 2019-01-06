@@ -1,8 +1,10 @@
+require('dotenv').config();
 const axios = require('axios');
 const Entity = require('./Entity').Entity;
 const BASE_URL = 'https://www.jsonstore.io/';
 
 const db = (token) => {
+    if (!token) throw Error('Missing TOKEN while creating db instance');
     const instance = axios.create({
         baseURL: `${BASE_URL}${token}/`,
         timeout: 4000,
@@ -57,10 +59,12 @@ const db = (token) => {
     };
 };
 
-const entityManager = (db, config = null) => {
+const entityManager = (dbInstance = null) => {
+    dbInstance = dbInstance || db(process.env.TOKEN);
     return {
-        getEntity(modelName) {
-            return new Entity(modelName, db, config);
+        getEntity(modelName, config = null) {
+            if (!modelName) throw Error('Missing modelName while creating entity');
+            return new Entity(modelName, dbInstance, config);
         }
     }
 };

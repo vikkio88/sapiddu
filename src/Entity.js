@@ -11,7 +11,7 @@ class Entity {
     }
 
     find(id) {
-        return this.db.getOne(this.name);
+        return this.db.getOne(this.name, id);
     }
 
     get() {
