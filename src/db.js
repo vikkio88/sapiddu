@@ -1,5 +1,5 @@
 const axios = require('axios');
-const ULID = require('ulid');
+const Entity = require('./Entity').Entity;
 const BASE_URL = 'https://www.jsonstore.io/';
 
 const db = (token) => {
@@ -28,8 +28,7 @@ const db = (token) => {
             return instance.get(`${modelName}/${id}`)
                 .then(this.handleResult);
         },
-        post(modelName, body, id = null) {
-            id = id || ULID.ulid();
+        post(modelName, body, id) {
             return instance.post(`${modelName}/${id}`, body)
                 .then(this.handleResult).then(result => {
                     return new Promise((resolve, reject) => {
@@ -58,6 +57,15 @@ const db = (token) => {
     };
 };
 
+const entityManager = (db, config = null) => {
+    return {
+        getEntity(modelName) {
+            return new Entity(modelName, db, config);
+        }
+    }
+};
+
 module.exports = {
-    db
+    db,
+    entityManager
 };
