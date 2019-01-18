@@ -19,7 +19,7 @@ const db = (token) => {
                 .then(this.handleResult);
         },
         filter(modelName, name, value) {
-            return instance.get(`${modelName}?orderKey=${name}&filterValue=${value}&valueType=number`)
+            return instance.get(`${modelName}?orderKey=${name}&filterValue=${value}`)
                 .then(this.handleResult);
         },
         get(modelName) {

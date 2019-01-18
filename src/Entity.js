@@ -18,6 +18,14 @@ class Entity {
         return this.db.get(this.name);
     }
 
+    filtered({key, value}) {
+        return this.db.filter(this.name, key, value);
+    }
+
+    ordered({key}) {
+        return this.db.order(this.name, key);
+    }
+
     create(body) {
         return this.db.post(this.name, body, this.config.primaryKeyGenerator());
     }
