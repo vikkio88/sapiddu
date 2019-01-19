@@ -3,5 +3,6 @@ const Entity = require('./src/Entity');
 module.exports = {
     db: db.db,
     entityManager: db.entityManager,
-    Entity: Entity
+    Entity: Entity.Entity,
+    EntityTypes: Entity.EntityTypes
 };
