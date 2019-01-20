@@ -1,15 +1,15 @@
-# sapiddu
-a small wrapper to use jsonstore.io as db
+# sapiddu - JsonStore.io wrapper
+a small wrapper to use [jsonstore.io](https://www.jsonstore.io)  as db
 
 ## Install
 ```
 npm i sapiddu
 ```
-You will need to have a .env file on the root of your project with:
+You will need to have a `.env` file on the root of your project with:
 ```
 TOKEN=THE_JSON_STORE_IO_TOKEN
 ```
-to get the [jsonstore.io](https://jsonstore.io) token head to their website.
+to get the [jsonstore.io](https://www.jsonstore.io) token head to their website.
 
 ```js
 const sapiddu = require('sapiddu');
