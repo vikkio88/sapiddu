@@ -1,15 +1,38 @@
 # sapiddu
 a small wrapper to use jsonstore.io as db
 
+## Install
+```
+npm i sapiddu
+```
+You will need to have a .env file on the root of your project with:
+```
+TOKEN=THE_JSON_STORE_IO_TOKEN
+```
+to get the [jsonstore.io](https://jsonstore.io) token head to their website.
+
 ```js
-const em = require('sapiddu').entityManager();
+const sapiddu = require('sapiddu');
 
-const user = em.getEntity('users');
+const em = sapiddu.entityManager();
+const people = em.getEntity('people', sapiddu.EntityTypes.TIMESTAMPS);
 
-user.create({username: "mario", password: "ciao1"}).then(result => console.log(result));
-// output → { id: '01D1H3TMMY021M0KYE6VXHB58M' }
-user.find("01D1H3TMMY021M0KYE6VXHB58M").then(result => console.log(result));
-// output → { password: 'ciao1', username: 'mario' }
-user.get().then(result => console.log(result));
-// output → {'1' :{ password: 'ciaoa', username: 'mario' }, '01D1H3TMMY021M0KYE6VXHB58M': { password: 'ciao1', username: 'mario' } }
+people.create({
+    name:'Mario', 
+    surname: 'Rossi'
+}).then(result => console.log(result));
+// output → { id: '01D1NQBVYS9JNZ699J0M6V1CMG' }
+
+// At some other point
+people.get().then(result => console.log(result));
+/* output →
+{
+    '01D1NQBVYS9JNZ699J0M6V1CMG': {
+        name: 'Mario',
+        surname: 'Rossi',
+        created: 1547991118,
+        updated: 1547991118,
+     }
+}
+*/
 ```
