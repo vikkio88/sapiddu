@@ -1,6 +1,6 @@
 {
   "name": "sapiddu",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "a jsonstore.io model wrapper",
   "repository": "https://github.com/vikkio88/sapiddu",
   "main": "index.js",
